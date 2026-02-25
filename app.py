@@ -10,10 +10,10 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .stApp {
-        background: #E8F5E9;
-        color: black;
-    }
+.stApp {
+    background-color: #E8F5E9;
+    color : black;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -55,14 +55,12 @@ with col1:
         image = Image.open(uploaded_file)
         st.image(image, width=400)
 
-    if st.button("Predict"):
+with col2:
+    if uploaded_file is not None:
+        if st.button("Predict"):
             with st.spinner("Analyzing image..."):
                 processed_img = preprocess_image(image)
                 prediction = model.predict(processed_img)
-
-with col2:
-    if uploaded_file is not None:
-        
             predicted_class = np.argmax(prediction)
             confidence = np.max(prediction)
 
